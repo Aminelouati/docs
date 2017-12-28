@@ -1,0 +1,24 @@
+# first we login and retrieve a session id
+ sessionid=$(curl -d "username=admin&password=admin" http://localhost:8080/rest/scheduler/login)
+
+sessionid=$(curl -d "username=louati&password=proactive" http://trydev.activeeon.com:8080/rest/scheduler/login)
+
+Echo $sessionid
+
+
+
+Job planner swagger: http://trydev.activeeon.com:8080/job-planner/swagger-ui.html#!/job-planner-controller/getScheduledWorkflowsUsingGET_1
+
+curl --request POST \ --url http://localhost:8080/rest/rm/nodesource/create \ --header 'content-type: application/x-www-form-urlencoded' \ --header 'sessionid:5bc856b5160082e506d7f2d791db04b48ff72015bc856b5160082e506d8000' \  --data 'nodeSourceName=toto&infrastructureType=org.ow2.proactive.resourcemanager.nodesource.infrastructure LocalInfrastructure&infrastructureParameters=&infrastructureFileParameters=1&PolicyType=org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy&PolicyParameters=&PolicyTypeParameters='
+
+
+curl --request POST --url http://localhost:8080/rest/rm/nodesource/create --header 'content-type: application/x-www-form-urlencoded' --header 'sessionid:5bc856b5160082e506d7bc4791db04b48ff72015bc856b5160082e506d8000'  --data 'nodeSourceName=toto&infrastructureType=org.ow2.proactive.resourcemanager.nodesource.infrastructure LocalInfrastructure&infrastructureParameters=&infrastructureFileParameters=1&PolicyType=org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy&PolicyParameters=&PolicyTypeParameters=' 
+
+
+curl --request POST --url http://localhost:8080/rest/rm/nodesource/pingfrequency --header 'content-type: application/x-www-form-urlencoded' --header 'sessionid:5bc856b5160082e506d7d5d791db04b48ff72015bc856b5160082e506d8000' --data 'nodeSourceName=LocalNodes'
+
+
+mv scheduling-portal/scheduler-portal/build/libs/scheduler-portal*.war scheduling/dist/war/scheduler.war
+mv scheduling-portal/rm-portal/build/libs/rm-portal*.war scheduling/dist/war/rm.war
+
+

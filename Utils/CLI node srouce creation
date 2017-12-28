@@ -1,0 +1,45 @@
+JSONValue json = JSONParser.parseStrict(jsonResult);
+            JSONObject obj = json.isObject();
+            if (obj != null) {
+                if (obj.containsKey("result")) {
+                    if (((JSONBoolean) obj.get("result")).booleanValue()) {
+                        jsonResult = createNonEscapedSimpleJsonPair("result", "true");
+                    } else {
+                        String errorMessage = obj.get("errorMessage").toString();
+                        write(response,
+                              createJavascriptPayload(callbackName,
+                                                      createEscapedSimpleJsonPair("errorMessage", errorMessage)));
+                        return;
+
+                    }
+                }
+            }`
+
+
+
+            ./bin/proactive-client --createns localns -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.LocalInfrastructure /Users/aminelouati/Downloads/admin_cred.txt 3 30000 ' ' -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ME' -X
+
+
+            ./bin/proactive-client -r http://62.210.106.13:8080/rm --createns localns -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.LocalInfrastructure /Users/aminelouati/Downloads/admin_cred.txt 3 30000 ' ' -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ME' -X
+
+
+
+cperMaster@try:~$ cat deploy-fake-ns.sh 
+#!/bin/bash
+
+export PAHOME=/home/cperMaster/opt/proactive/scheduling
+$PAHOME/bin/proactive-client -l bobot -p proactive --createns OpenStack -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ALL'
+$PAHOME/bin/proactive-client -l bobot -p proactive --createns VMware -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ALL'
+$PAHOME/bin/proactive-client -l bobot -p proactive --createns AmazonAWS -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ALL'
+$PAHOME/bin/proactive-client -l bobot -p proactive --createns Azure -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ALL'
+$PAHOME/bin/proactive-client -l bobot -p proactive --createns IbmSoftlayer -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ALL'
+$PAHOME/bin/proactive-client -l bobot -p proactive --createns GoogleCloudCompute -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ALL'
+$PAHOME/bin/proactive-client -l bobot -p proactive --createns AmazonAWS-Spot -infrastructure org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager -policy org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy 'ALL' 'ALL'
+
+
+[11:33] 
+bon ce ne sont pas des LocalInfrastructure
+
+
+[11:33] 
+mais utilises des simple quotes
